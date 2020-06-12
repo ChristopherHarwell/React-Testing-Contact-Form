@@ -1,6 +1,7 @@
+import { render, fireEvent } from "@testing-library/react";
 import React from "react";
-import { render, getByPlaceholderText, getAllByLabelText, getByDisplayValue, queryByPlaceholderText, getByTestId } from "@testing-library/react";
 import App from "./App";
+import { act } from "react-dom/test-utils";
 
 test("renders App without crashing", () => {
   render(<App />);
@@ -28,9 +29,10 @@ test('should have label with First Name* as text', () => {
   getByText(/first name\*/i)
 })
 
-// describe('First name input should accept a max of 15 character', () => {
-//   it("max-length should be 15 characters minimum", () => {
-//     expect()
-//   })
-  
-// })
+
+test('should click button and submit form',() => {
+  const container = render(<App/>);
+  const button = container.getByTestId(/submit-button/i);
+  fireEvent.click(button, 0);
+})
+
